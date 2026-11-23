@@ -7,6 +7,7 @@ import './globals.css';
 
 interface LayoutProps {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }
 
 export const metadata: Metadata = {
@@ -14,13 +15,14 @@ export const metadata: Metadata = {
   description: 'Simple app for managing personal notes',
 };
 
-export default function RootLayout({ children }: LayoutProps) {
+export default function RootLayout({ children, modal }: LayoutProps) {
   return (
     <html lang="en">
       <body>
         <TanStackProvider>
           <Header />
           {children}
+          {modal}
           <Footer />
         </TanStackProvider>
       </body>

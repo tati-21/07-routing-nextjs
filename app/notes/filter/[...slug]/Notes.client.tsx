@@ -15,14 +15,18 @@ import { fetchNotes } from '@/lib/api';
 
 const PER_PAGE = 12;
 
-export default function NotesClient() {
+interface NotesClientProps {
+  tag?: string;
+}
+
+export default function NotesClient({ tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['notes', page, search],
-    queryFn: () => fetchNotes({ page, perPage: PER_PAGE, search }),
+    queryKey: ['notes', page, search, tag],
+    queryFn: () => fetchNotes({ page, perPage: PER_PAGE, search, tag }),
     placeholderData: keepPreviousData,
   });
 

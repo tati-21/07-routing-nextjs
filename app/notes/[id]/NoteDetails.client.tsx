@@ -2,10 +2,12 @@
 import css from './NoteDetails.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { fetchNoteById } from '@/lib/api';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 const NoteDetailsClient = () => {
   const { id } = useParams<{ id: string }>();
+  const router = useRouter();
+  const handleBack = () => router.back();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['note', id],
@@ -30,6 +32,9 @@ const NoteDetailsClient = () => {
           <p className={css.tag}>{data.tag}</p>
           <p className={css.content}>{data.content}</p>
           <p className={css.date}>{data.createdAt}</p>
+          <button className={css.backBtn} type="button" onClick={handleBack}>
+            ← Back to notes
+          </button>
         </div>
       </div>
     </main>
